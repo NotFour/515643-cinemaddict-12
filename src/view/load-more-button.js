@@ -1,18 +1,16 @@
 import {createElement} from "../util";
 
-export default class FilmContainer {
+export default class LoadMoreButton {
   constructor() {
     this._element = null;
   }
 
-  _createFilmContainerTemplate() {
-    return (
-      `<div class="films-list__container">`
-    );
+  _createLoadMoreButtonTemplate() {
+    return `<button class="films-list__show-more">Show more</button>`;
   }
 
   _getTemplate() {
-    return this._createFilmContainerTemplate();
+    return this._createLoadMoreButtonTemplate();
   }
 
   getElement() {

@@ -1,18 +1,19 @@
 import {createElement} from "../util";
 
-export default class FilmContainer {
-  constructor() {
+export default class FilmCount {
+  constructor(filmsCount) {
+    this._filmsCount = filmsCount;
     this._element = null;
   }
 
-  _createFilmContainerTemplate() {
+  _createFilmsCountTemplate(count) {
     return (
-      `<div class="films-list__container">`
+      `<p>${count} movies inside</p>`
     );
   }
 
   _getTemplate() {
-    return this._createFilmContainerTemplate();
+    return this._createFilmsCountTemplate(this._filmsCount);
   }
 
   getElement() {
