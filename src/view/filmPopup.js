@@ -1,4 +1,4 @@
-import {createElement, getFormatedDate} from "../util";
+import {createElement, getFormatedDate, render, RenderPosition} from "../util";
 import Comment from "./comment";
 
 export default class FilmPopup {
@@ -17,6 +17,13 @@ export default class FilmPopup {
     return result;
   }
 
+  _renderComments(comments) {
+    const commentsList = this.getElement().querySelector(`.film-details__comments-list`);
+
+    comments
+      .forEach((comment) => render(commentsList, new Comment(comment).getElement(), RenderPosition.BEFOREEND));
+  }
+
   _createFilmPopupTemplate(film) {
     const {name, rating, poster, release, duration, genre, description, makers, restrictions, filters, comments} = film;
 
@@ -31,11 +38,6 @@ export default class FilmPopup {
     const isFavorite = filters.favorites ? `checked` : ``;
     const releaseYear = getFormatedDate(release.date);
     const commentsCount = comments.length;
-    let commentsTemplate = ``;
-
-    comments.forEach((comment) => {
-      commentsTemplate += new Comment(comment).getElement();
-    });
 
     return (
       `<section class="film-details">
@@ -115,7 +117,7 @@ export default class FilmPopup {
           <section class="film-details__comments-wrap">
             <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${commentsCount}</span></h3>
 
-            <ul class="film-details__comments-list">${commentsTemplate}</ul>
+            <ul class="film-details__comments-list"></ul>
 
             <div class="film-details__new-comment">
               <div for="add-emoji" class="film-details__add-emoji-label"></div>
@@ -160,6 +162,7 @@ export default class FilmPopup {
   getElement() {
     if (!this._element) {
       this._element = createElement(this._getTemplate());
+      this._renderComments(this._film.comments);
     }
 
     return this._element;

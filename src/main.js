@@ -73,7 +73,7 @@ const renderFilm = (filmContainer, film) => {
 };
 
 const renderBoard = (boardContainer, boardFilms) => {
-  const filmSection = new FilmSection();
+  const filmSection = new FilmSection(boardFilms.length);
   const filmContainer = new FilmContainer();
 
   render(boardContainer, filmSection.getElement(), RenderPosition.BEFOREEND);
@@ -111,6 +111,6 @@ const renderBoard = (boardContainer, boardFilms) => {
 
 
 const footerStatisticsTemplate = bodyElement.querySelector(`.footer__statistics`);
-render(footerStatisticsTemplate, new FilmCount(filters.all).getElement(), `beforeend`);
+render(footerStatisticsTemplate, new FilmCount(films.length).getElement(), `beforeend`);
 
 renderBoard(mainElement, films);
