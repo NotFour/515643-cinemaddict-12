@@ -1,39 +1,44 @@
-import {createCommentTemplate} from "./comment";
-import {getFormatedDate} from "../util";
+import {createElement, getFormatedDate} from "../util";
+import Comment from "./comment";
 
-const createGenresTemplate = (genres) => {
-  let result = ``;
-
-  for (let i = 0; i < genres.length; i++) {
-    result += `<span class="film-details__genre">${genres[i]}</span>`;
+export default class FilmPopup {
+  constructor(film) {
+    this._film = film;
+    this._element = null;
   }
 
-  return result;
-};
+  _createGenresTemplate(genres) {
+    let result = ``;
 
-export const createFilmPopupTemplate = (film) => {
-  const {name, rating, poster, release, duration, genre, description, makers, restrictions, filters, comments} = film;
+    for (let i = 0; i < genres.length; i++) {
+      result += `<span class="film-details__genre">${genres[i]}</span>`;
+    }
 
-  const publicName = name.public;
-  const originalName = `Original: ${name.original}`;
-  const writers = makers.screenwriters.join(`, `);
-  const actors = makers.actors.join(`, `);
-  const genreTitle = genre.length === 1 ? `Genre` : `Genres`;
-  const genres = createGenresTemplate(genre);
-  const isWatchList = filters.watchlist ? `checked` : ``;
-  const isWatched = filters.history ? `checked` : ``;
-  const isFavorite = filters.favorites ? `checked` : ``;
-  const releaseYear = getFormatedDate(release.date);
+    return result;
+  }
 
-  const commentsCount = comments.length;
-  let commentsTemplate = ``;
+  _createFilmPopupTemplate(film) {
+    const {name, rating, poster, release, duration, genre, description, makers, restrictions, filters, comments} = film;
 
-  comments.forEach((comment) => {
-    commentsTemplate += createCommentTemplate(comment);
-  });
+    const publicName = name.public;
+    const originalName = `Original: ${name.original}`;
+    const writers = makers.screenwriters.join(`, `);
+    const actors = makers.actors.join(`, `);
+    const genreTitle = genre.length === 1 ? `Genre` : `Genres`;
+    const genres = this._createGenresTemplate(genre);
+    const isWatchList = filters.watchlist ? `checked` : ``;
+    const isWatched = filters.history ? `checked` : ``;
+    const isFavorite = filters.favorites ? `checked` : ``;
+    const releaseYear = getFormatedDate(release.date);
+    const commentsCount = comments.length;
+    let commentsTemplate = ``;
 
-  return (
-    `<section class="film-details">
+    comments.forEach((comment) => {
+      commentsTemplate += new Comment(comment).getElement();
+    });
+
+    return (
+      `<section class="film-details">
       <form class="film-details__inner" action="" method="get">
         <div class="form-details__top-container">
           <div class="film-details__close">
@@ -145,5 +150,22 @@ export const createFilmPopupTemplate = (film) => {
         </div>
       </form>
     </section>`
-  );
-};
+    );
+  }
+
+  _getTemplate() {
+    return this._createFilmPopupTemplate(this._film);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this._getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
