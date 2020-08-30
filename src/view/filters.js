@@ -1,9 +1,9 @@
-import {createElement} from "../util";
+import Abstract from "./abstract.js";
 
-export default class Filters {
+export default class Filters extends Abstract {
   constructor(filters) {
+    super();
     this._filters = filters;
-    this._element = null;
   }
 
   _createFiltersTemplate(filters) {
@@ -24,17 +24,5 @@ export default class Filters {
 
   _getTemplate() {
     return this._createFiltersTemplate(this._filters);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this._getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

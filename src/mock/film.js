@@ -1,5 +1,5 @@
-import {getRandomInteger, getRandomItems} from "../util";
-import {generateComment} from "./comment";
+import {getRandomInteger, getRandomItems} from "../utils/common.js";
+import {generateComment} from "./comment.js";
 
 const generateFilmName = () => {
   const filmNames = [
