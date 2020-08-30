@@ -1,9 +1,9 @@
-import {createElement} from "../util";
+import Abstract from "./abstract.js";
 
-export default class Comment {
+export default class Comment extends Abstract {
   constructor(comment) {
+    super();
     this._comment = comment;
-    this._element = null;
   }
 
   _createCommentTemplate(comment) {
@@ -28,17 +28,5 @@ export default class Comment {
 
   _getTemplate() {
     return this._createCommentTemplate(this._comment);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this._getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

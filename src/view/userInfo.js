@@ -1,10 +1,6 @@
-import {createElement} from "../util";
+import Abstract from "./abstract.js";
 
-export default class UserInfo {
-  constructor() {
-    this._element = null;
-  }
-
+export default class UserInfo extends Abstract {
   _createUserInfoTemplate() {
     return (
       `<section class="header__profile profile">
@@ -16,17 +12,5 @@ export default class UserInfo {
 
   _getTemplate() {
     return this._createUserInfoTemplate();
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this._getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

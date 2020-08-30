@@ -1,9 +1,9 @@
-import {createElement} from "../util";
+import Abstract from "./abstract.js";
 
-export default class FilmCount {
+export default class FilmCount extends Abstract {
   constructor(filmsCount) {
+    super();
     this._filmsCount = filmsCount;
-    this._element = null;
   }
 
   _createFilmsCountTemplate(count) {
@@ -14,17 +14,5 @@ export default class FilmCount {
 
   _getTemplate() {
     return this._createFilmsCountTemplate(this._filmsCount);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this._getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

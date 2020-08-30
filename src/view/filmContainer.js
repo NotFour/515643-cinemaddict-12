@@ -1,29 +1,14 @@
-import {createElement} from "../util";
+import Abstract from "./abstract.js";
 
-export default class FilmContainer {
-  constructor() {
-    this._element = null;
-  }
+export default class FilmContainer extends Abstract {
 
   _createFilmContainerTemplate() {
     return (
-      `<div class="films-list__container">`
+      `<div class="films-list__container"></div>`
     );
   }
 
   _getTemplate() {
     return this._createFilmContainerTemplate();
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this._getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

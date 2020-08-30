@@ -1,4 +1,4 @@
-import {getRandomInteger, getRandomItems} from "../util";
+import {getRandomInteger, getRandomItems} from "../utils/common.js";
 
 const generateText = () => {
   const comments = [
