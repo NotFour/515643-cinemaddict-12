@@ -16,10 +16,8 @@ const headerElement = bodyElement.querySelector(`.header`);
 const mainElement = bodyElement.querySelector(`.main`);
 
 const boardPresenter = new Board(mainElement);
-
 render(headerElement, new UserInfo(), RenderPosition.BEFOREEND);
 render(mainElement, new Filters(filters), RenderPosition.BEFOREEND);
-console.log(films);
 boardPresenter.init(films);
 
 const footerStatisticsTemplate = bodyElement.querySelector(`.footer__statistics`);
