@@ -20,3 +20,11 @@ export const getFormatedDate = (date) => {
 
   return `${day} ${months[monthIndex]} ${year}`;
 };
+
+export const sortFilmDate = (taskA, taskB) => {
+  return taskB.release.date.getTime() - taskA.release.date.getTime();
+};
+
+export const sortFilmRating = (taskA, taskB) => {
+  return taskB.rating - taskA.rating;
+};
