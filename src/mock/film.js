@@ -1,6 +1,8 @@
 import {getRandomInteger, getRandomItems} from "../utils/common.js";
 import {generateComment} from "./comment.js";
 
+const generateId = () => Date.now() + parseInt(Math.random() * 10000, 10);
+
 const generateFilmName = () => {
   const filmNames = [
     {
@@ -138,6 +140,7 @@ const generateFilters = () => {
 
 export const generateFilm = () => {
   const film = {
+    id: generateId(),
     name: generateFilmName(),
     poster: generateImgPath(),
     makers: generateMakers(),
