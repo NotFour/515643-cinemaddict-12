@@ -1,4 +1,5 @@
 import Abstract from "./abstract.js";
+import {formatDuration} from "../utils/film";
 
 export default class FilmCard extends Abstract {
   constructor(film) {
@@ -14,6 +15,7 @@ export default class FilmCard extends Abstract {
   _createFilmCardTemplate(film) {
     const {name, rating, poster, release, duration, genre, description, filters, comments} = film;
 
+    const currentDuration = formatDuration(duration);
     const MAX_DESCRIPTION_LENGTH = 140;
     const publicName = name.public;
     const releaseYear = release.date.getFullYear();
@@ -30,7 +32,7 @@ export default class FilmCard extends Abstract {
       <p class="film-card__rating">${rating}</p>
       <p class="film-card__info">
         <span class="film-card__year">${releaseYear}</span>
-        <span class="film-card__duration">${duration}</span>
+        <span class="film-card__duration">${currentDuration}</span>
         <span class="film-card__genre">${mainGenre}</span>
       </p>
       <img src=".${poster}" alt="" class="film-card__poster">

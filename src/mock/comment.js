@@ -32,7 +32,7 @@ const generateAuthor = () => {
 };
 
 const generateDate = (filmCreated) => {
-  return new Date(getRandomInteger(60000, Date.now() - filmCreated.getTime()));
+  return new Date(getRandomInteger(new Date(filmCreated).getTime(), Date.now()));
 };
 
 export const generateComment = (date) => {

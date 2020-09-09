@@ -1,4 +1,5 @@
 import Abstract from "./abstract.js";
+import {formatCommentDate} from "../utils/film";
 
 export default class Comment extends Abstract {
   constructor(comment) {
@@ -8,6 +9,7 @@ export default class Comment extends Abstract {
 
   _createCommentTemplate(comment) {
     const {text, emotion, author, date} = comment;
+    const currentDate = formatCommentDate(date);
 
     return (
       `<li class="film-details__comment">
@@ -18,7 +20,7 @@ export default class Comment extends Abstract {
         <p class="film-details__comment-text">${text}</p>
         <p class="film-details__comment-info">
           <span class="film-details__comment-author">${author}</span>
-          <span class="film-details__comment-day">${date}</span>
+          <span class="film-details__comment-day">${currentDate}</span>
           <button class="film-details__comment-delete">Delete</button>
         </p>
       </div>
