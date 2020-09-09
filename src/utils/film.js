@@ -1,24 +1,34 @@
+import moment from "moment";
+
 export const getFormatedDate = (date) => {
-  const months = [
-    `January`,
-    `February`,
-    `March`,
-    `April`,
-    `May`,
-    `June`,
-    `July`,
-    `August`,
-    `September`,
-    `October`,
-    `November`,
-    `December`
-  ];
+  if (!(date instanceof Date)) {
+    return ``;
+  }
 
-  const day = date.getDate();
-  const monthIndex = date.getMonth();
-  const year = date.getFullYear();
+  return moment(date).format(`DD MMMM YYYY`);
+};
 
-  return `${day} ${months[monthIndex]} ${year}`;
+export const formatCommentDate = (date) => {
+  if (!(date instanceof Date)) {
+    return ``;
+  }
+
+
+  const dayAgoToString = {
+    0: `Today`,
+    1: `1 day ago`,
+    2: `2 days ago`
+  };
+
+  const dayAgo = Math.floor((Date.now() - date) / 1000 / 3600 / 24);
+
+  return dayAgo < 3 ? dayAgoToString[dayAgo] : moment(date).format(`YYYY/MM/DD HH:mm`);
+};
+
+export const formatDuration = (minutes) => {
+  const currentDuration = moment.utc().startOf(`day`).add(minutes, `minutes`);
+
+  return `${currentDuration.format(`h`)}h ${currentDuration.format(`mm`)}m`;
 };
 
 export const sortFilmDate = (taskA, taskB) => {

@@ -48,7 +48,7 @@ export default class FilmPopup extends SmartView {
     const isWatchList = filters.watchlist ? `checked` : ``;
     const isWatched = filters.history ? `checked` : ``;
     const isFavorite = filters.favorites ? `checked` : ``;
-    const releaseYear = getFormatedDate(release.date);
+    const releaseDate = getFormatedDate(release.date);
     const commentsCount = comments.length;
     const currentEmotionElem = currentEmotion ? `<img src="images/emoji/${currentEmotion}.png" width="55" height="55" alt="emoji-${currentEmotion}">` : ``;
     const currentEmotionToChecked = {
@@ -103,7 +103,7 @@ export default class FilmPopup extends SmartView {
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Release Date</td>
-                  <td class="film-details__cell">${releaseYear}</td>
+                  <td class="film-details__cell">${releaseDate}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Runtime</td>

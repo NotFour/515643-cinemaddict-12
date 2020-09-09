@@ -41,10 +41,9 @@ const generateImgPath = () => {
 };
 
 const generateDuration = () => {
-  const hours = getRandomInteger(1, 3);
-  const minutes = getRandomInteger(10, 59);
+  const minutes = getRandomInteger(60, 180);
 
-  return `${hours}h ${minutes}m`;
+  return `${minutes}`;
 };
 
 const generateGenre = () => {
@@ -83,11 +82,11 @@ const generateMakers = () => {
 
 const generateRelease = () => {
   const date = {
-    year: getRandomInteger(1800, 2020),
+    year: getRandomInteger(1970, 2019),
     month: getRandomInteger(0, 11),
-    day: getRandomInteger(1, 28),
-    hour: getRandomInteger(0, 23),
-    minutes: getRandomInteger(1, 59),
+    day: getRandomInteger(10, 28),
+    hour: getRandomInteger(10, 23),
+    minutes: getRandomInteger(10, 59),
     seconds: getRandomInteger(1, 59)
   };
 
@@ -99,7 +98,7 @@ const generateRelease = () => {
   ];
 
   return {
-    date: new Date(...Object.values(date)),
+    date: new Date(`${date.year}-05-${date.day}T${date.hour}:${date.minutes}:00.000Z`),
     country: getRandomItems(countries)[0]
   };
 };
